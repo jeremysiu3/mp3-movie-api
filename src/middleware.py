@@ -17,8 +17,6 @@ async def log_requests(request: Request, call_next):
     try:
         response = await call_next(request)
     except Exception:
-        # TODO 1: Log the unexpected exception at ERROR with exc_info=True.
-        # Include the request ID. Do not expose exception details to the client.
         logger.error(f"Unexpected failure: request_id={request_id}", exc_info=True)
         response = JSONResponse(
             status_code=500,
